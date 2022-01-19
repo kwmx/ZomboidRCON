@@ -1,0 +1,121 @@
+﻿<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value> -  Everything an Observer can use, plus:
+ -  Toggle god mod (on himself and others)
+ -  Toggle invisible (on himself and others)
+ - Can toggle noclip (on himself and others)
+ - Teleport to a player to another player  
+ - Use /alarm, /gunshot, /thunder and /chopper
+ - Start/Stop rain
+ - Add item
+ - Add xp</value>
+  </data>
+  <data name="richTextBox3.Text" xml:space="preserve">
+    <value> - Toggle god mod (on himself only)
+ - Toggle invisible (on himself only)
+ - See players connected (/players)
+ - Teleport to a player (can't teleport a player elsewhere)
+ - Can toggle noclip (on himself only)
+ - Teleport to coordinates
+ - See server options
+ - Can open locked doors
+ - Can go inside safehouses
+ - Can't be kicked if too laggy
+ - Can always join server (even if full)
+ - Can talk even being invisible
+ - Sees invisible players
+ - Can't be hit by players
+ - Log directly invisible/invincible
+ - Can see players stats (name, skill, traits...) with click on player -&gt; Check Stats (but can't modify them)</value>
+  </data>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="richTextBox4.Text" xml:space="preserve">
+    <value>-  Everything a GM can use, plus:
+ - Create horde
+ - Kick user
+ - Display server message
+ - See connection info of a player
+ - Disconnect a player by connection number (/disconnect)
+ - Use /nightlengthmodifier
+ - Can modify player stats in the player stats UI
+ - Can ban a player from /all chat</value>
+  </data>
+  <data name="richTextBox5.Text" xml:space="preserve">
+    <value>-  Everything a Moderator can use, plus:
+-  Save world
+-  Quit world
+-  Change access level (including admin)
+-  Reload server options
+-  Change server options
+-  Send pulse
+-  Reload Lua files
+-  Bypass Lua checksum</value>
+  </data>
+  <data name="richTextBox6.Text" xml:space="preserve">
+    <value>-  Everything an Overseer can use, plus:
+-  Ban/Unban user (including steam ID)
+-  Manipulate whitelist (/adduser, /addusertowhitelist, /addalltowhitelist, /removeuserfromwhitelist
+-  Change access level (can't set admin)
+-  Can setup safehouses</value>
+  </data>
+</root>
