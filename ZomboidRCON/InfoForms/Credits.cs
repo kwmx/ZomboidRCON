@@ -47,5 +47,11 @@ namespace ZomboidRCON.InfoForms
             };
             Process.Start(ps);
         }
+
+        private void Credits_Load(object sender, EventArgs e)
+        {
+            versionLbl.Text = Application.ProductVersion;
+
+        }
     }
 }

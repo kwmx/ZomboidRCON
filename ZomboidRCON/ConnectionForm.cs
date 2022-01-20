@@ -60,41 +60,46 @@ namespace ZomboidRCON
         private async Task RconConnectAsync(IPAddress address, int port, string password)
         {
             RconClient client = RconClient.Create(address.ToString(), port);
-            await client.ConnectAsync();
-            var authenticated = await client.AuthenticateAsync(password);
-            if (authenticated)
+            try
             {
-                if(saveBox.Checked)
+                await client.ConnectAsync();
+                var authenticated = await client.AuthenticateAsync(password);
+                if (authenticated)
                 {
-                    Properties.Settings.Default.ip = address.ToString();
-                    Properties.Settings.Default.port = port;
-                    Properties.Settings.Default.password = password;
-                    Properties.Settings.Default.Save();
-                }
-
-                main.ResetConnection(client, address.ToString(), port);
-                main.Show();
-                Close();
-                return;
-                /*
-                string status = await client.ExecuteCommandAsync("players");
-                string[] arr = status.Split('\n');
-                foreach(string item in arr)
-                {
-                    if(item.StartsWith('-'))
+                    if (saveBox.Checked)
                     {
-                        string user = item.Substring(1);
-                        MessageBox.Show(user);
-
+                        Properties.Settings.Default.ip = address.ToString();
+                        Properties.Settings.Default.port = port;
+                        Properties.Settings.Default.password = password;
+                        Properties.Settings.Default.Save();
                     }
-                }
-                */
-            } 
-            else
-            {
-                MessageBox.Show(this, "Authentication issue: Please check your password", "ZomboidRCON");
-            }
 
+                    main.ResetConnection(client, address.ToString(), port);
+                    main.Show();
+                    Close();
+                    return;
+                    /*
+                    string status = await client.ExecuteCommandAsync("players");
+                    string[] arr = status.Split('\n');
+                    foreach(string item in arr)
+                    {
+                        if(item.StartsWith('-'))
+                        {
+                            string user = item.Substring(1);
+                            MessageBox.Show(user);
+
+                        }
+                    }
+                    */
+                }
+                else
+                {
+                    MessageBox.Show(this, "Authentication issue: Please check your password", "ZomboidRCON");
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(this, "Error: " + ex.Message, "ZomboidRCON");
+            }
 
             ipTxt.Enabled = true;
             portTxt.Enabled = true;

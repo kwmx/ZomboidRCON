@@ -18,7 +18,9 @@ namespace ZomboidRCON
             InitializeComponent();
         }
         private async void RefreshPlayers()
-        { 
+        {
+            refreshBtn.Enabled = false;
+            refreshBtn.Cursor = Cursors.WaitCursor;
             playersView.Items.Clear();
             List<Player> players = await server.GetPlayers();
             Debug.WriteLine(players.Count);
@@ -32,13 +34,14 @@ namespace ZomboidRCON
                 item.Group = playersView.Groups[0];
                 else item.Group = playersView.Groups[1];
             }
+            refreshBtn.Enabled = true;
+            refreshBtn.Cursor = Cursors.Hand;
         }
 
         public void ResetConnection(RconClient clientConnection, string host, int port)
         {
             server = new Server(clientConnection, host, port);
             RefreshPlayers();
-            refreshBtn.Enabled = false;
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -183,6 +186,11 @@ namespace ZomboidRCON
             Player player = await GetPlayerByName(playersView.SelectedItems[0].Text);
             HelperForms.VehicleSpawnMenu vsm = new HelperForms.VehicleSpawnMenu(player, server);
             vsm.Show();
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            server.Disconnect();
         }
     }
 }

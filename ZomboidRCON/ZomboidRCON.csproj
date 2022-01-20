@@ -7,6 +7,14 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Resources\Icons\icon.ico</ApplicationIcon>
+    <StartupObject>ZomboidRCON.Program</StartupObject>
+    <Copyright>Faisal K</Copyright>
+    <PackageLicenseFile>/LICENSE</PackageLicenseFile>
+    <SignAssembly>False</SignAssembly>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <NeutralLanguage>en</NeutralLanguage>
+    <FileVersion>1.0.2</FileVersion>
+    <Version>$(Versionprefix)</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -210,6 +210,10 @@ namespace ZomboidRCON.Wrapper
                 throw ece;
             }
         }
+        public void Disconnect()
+        {
+            client.Disconnect();
+        }
         public List<Vehicle> Vehicles { get { return dataManager.Vehicles; } }
         public string Host { get { return host; } }
         public int Port { get { return port; } }
