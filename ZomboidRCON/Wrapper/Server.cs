@@ -25,12 +25,12 @@ namespace ZomboidRCON.Wrapper
         }
         public async Task<List<Player>> GetPlayers()
         {
+            dataManager.SetAllPlayersOffline();
             List<Player> players = new List<Player>();
             try
             {
                 string response = await client.ExecuteCommandAsync("players");
                 string[] arr = response.Split('\n');
-                List<Player> list = new List<Player>();
                 foreach (string item in arr)
                 {
                     if (item.StartsWith('-'))
@@ -41,16 +41,174 @@ namespace ZomboidRCON.Wrapper
                             isOnline = true,
                             accessLevel =  AccessLevel.Unknown,
                         };
-                        list.Add(player);
+                        players.Add(player);
+                        dataManager.AddPlayer(player);
                     }
                 }
-                dataManager.AddPlayer(list);
             }
             catch (TaskCanceledException)
             {
                 MessageBox.Show("Unable to execute Fetch players command. Try reconnecting", "ZomboidRCON");
             }
-            return players;
+            return dataManager.Players;
+        }
+        public async void AddPlayerToWhiteList(Player player)
+        {
+            if (!player.isOnline)
+            {
+                MessageBox.Show("Player is offline, command cannot be executed", "ZomboidRCON");
+                return;
+            }
+            try
+            {
+                string response = await client.ExecuteCommandAsync("addusertowhitelist " + player.Name);
+                MessageBox.Show(response, "ZomboidRCON");
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Unable to add player to whitelist. Try reconnecting", "ZomboidRCON");
+            }
+        }
+        public async void ChangePlayerGodmodeStatus(Player player, bool enable)
+        {
+            if (!player.isOnline)
+            {
+                MessageBox.Show("Player is offline, command cannot be executed", "ZomboidRCON");
+                return;
+            }
+            try
+            {
+                string response = await client.ExecuteCommandAsync("godmod " + player.Name + (enable ? " -true" : " -false"));
+                MessageBox.Show(response, "ZomboidRCON");
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Unable change godmod on player. Try reconnecting", "ZomboidRCON");
+            }
+        }
+        public async void KickPlayer(Player player)
+        {
+            if (!player.isOnline)
+            {
+                MessageBox.Show("Player is offline, command cannot be executed", "ZomboidRCON");
+                return;
+            }
+            try
+            {
+                string response = await client.ExecuteCommandAsync("kickuser " + player.Name);
+                MessageBox.Show(response, "ZomboidRCON");
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Unable to kick player. Try reconnecting", "ZomboidRCON");
+            }
+        }
+        public async Task<bool> TeleportToPlayer(Player player, Player toPlayer)
+        {
+            if (!player.isOnline || !toPlayer.isOnline)
+            {
+                MessageBox.Show("Both players have to be online, command cannot be executed", "ZomboidRCON");
+                return false;
+            }
+            try
+            {
+                string response = await client.ExecuteCommandAsync("teleport " + player.Name + " " + toPlayer.Name);
+                MessageBox.Show(response, "ZomboidRCON");
+                return true;
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Unable to teleport player. Try reconnecting", "ZomboidRCON");
+                return false;
+            }
+        }
+        public async Task<bool> SpawnVehicleForPlayer(Player player, Variant variant)
+        {
+            if (!player.isOnline)
+            {
+                MessageBox.Show("Player is offline, command cannot be executed", "ZomboidRCON");
+                return false;
+            }
+            try
+            {
+                string response = await client.ExecuteCommandAsync("addvehicle " + variant.VariantID + " " + player.Name);
+                MessageBox.Show(response, "ZomboidRCON");
+                return true;
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Unable to teleport player. Try reconnecting", "ZomboidRCON");
+                return false;
+            }
+        }
+        public async Task<bool> SpawnVehicleForPlayer(Player player, string vehicleID)
+        {
+            if (!player.isOnline)
+            {
+                MessageBox.Show("Player is offline, command cannot be executed", "ZomboidRCON");
+                return false;
+            }
+            try
+            {
+                string response = await client.ExecuteCommandAsync("addvehicle " + vehicleID + " " + player.Name);
+                MessageBox.Show(response, "ZomboidRCON");
+                return true;
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Unable to teleport player. Try reconnecting", "ZomboidRCON");
+                return false;
+            }
+        }
+        public async void SetAccessLevel(Player player, AccessLevel accessLevel)
+        {
+            string access = "none";
+            switch (accessLevel)
+            {
+                case AccessLevel.Observer:
+                    access = "observer";
+                    break;
+                case AccessLevel.GM:
+                    access = "gm";
+                    break;
+                case AccessLevel.Overseer:
+                    access = "overseer";
+                    break;
+                case AccessLevel.Moderator:
+                    access = "moderator";
+                    break;
+                case AccessLevel.Admin:
+                    access = "admin";
+                    break;
+                case AccessLevel.None:
+                    break;
+                case AccessLevel.Unknown:
+                    break;
+                default:
+                    access = "none";
+                    break;
+            }
+            try
+            {
+                string response = await client.ExecuteCommandAsync("setaccesslevel  " + player.Name + " " + access);
+                MessageBox.Show(response, "ZomboidRCON");
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Unable to change player's access level. Try reconnecting", "ZomboidRCON");
+            }
+        }
+        public async Task<String> ExecuteCommand(string command)
+        {
+            if (string.IsNullOrWhiteSpace(command)) return "";
+            try
+            {
+                return await client.ExecuteCommandAsync(command);
+            }
+            catch (TaskCanceledException ece)
+            {
+                throw ece;
+            }
         }
         public List<Vehicle> Vehicles { get { return dataManager.Vehicles; } }
         public string Host { get { return host; } }

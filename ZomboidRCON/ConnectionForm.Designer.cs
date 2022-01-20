@@ -121,7 +121,7 @@
             this.Controls.Add(this.ipLbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ConnectionForm";
-            this.Text = "ConnectionForm";
+            this.Text = "Connect to Zomboid RCON server";
             this.Load += new System.EventHandler(this.ConnectionForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

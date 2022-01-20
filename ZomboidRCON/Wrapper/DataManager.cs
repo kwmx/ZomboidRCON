@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LiteDB;
 using ZomboidRCON.Models;
+using System.Linq;
 
 namespace ZomboidRCON.Wrapper
 {
@@ -16,12 +17,8 @@ namespace ZomboidRCON.Wrapper
             database = new LiteDatabase(dbPath + ".zrdb");
             CreateDefault(database);
         }
-        public List<Vehicle> Vehicles { get { return getAllVehicles(); } }
-        private List<Vehicle> getAllVehicles()
-        {
-            List<Vehicle> vehicles = (List<Vehicle>)database.GetCollection<Vehicle>();
-            return vehicles;
-        }
+        public List<Vehicle> Vehicles { get { return database.GetCollection<Vehicle>("vehicles").FindAll().ToList(); } }
+        public List<Player> Players { get { return database.GetCollection<Player>("players").FindAll().ToList(); } }
 
         private void CreateDefault(LiteDatabase database)
         {
@@ -469,8 +466,11 @@ namespace ZomboidRCON.Wrapper
         public void AddPlayer(Player player)
         {
             var col = database.GetCollection<Player>("players");
-            if (!col.Exists(Query.EQ("Name", player.Name)))
+            if (col.Exists(Query.EQ("Name", player.Name)))
             {
+                Player p = col.FindOne(x => x.Name.Equals(player.Name));
+                p.isOnline = true;
+                col.Update(p);
                 return;
             }
             col.Insert(player);
@@ -490,6 +490,11 @@ namespace ZomboidRCON.Wrapper
         {
             var col = database.GetCollection<Item>("items");
             col.Insert(item);
+        }
+        public void SetAllPlayersOffline()
+        {
+            var col = database.GetCollection<Player>("players");
+            col.UpdateMany(p => new Player { Name = p.Name, isOnline = false, accessLevel = p.accessLevel}, p => p.isOnline == true);
         }
     }
 }

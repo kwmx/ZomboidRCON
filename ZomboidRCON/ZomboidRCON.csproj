@@ -43,6 +43,7 @@
   <ItemGroup>
     <Folder Include="Resources\Items\" />
     <Folder Include="Resources\Icons\" />
+    <Folder Include="Resources\others\" />
     <Folder Include="Resources\Vehicles\" />
   </ItemGroup>
 
