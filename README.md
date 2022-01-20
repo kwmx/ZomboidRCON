@@ -6,6 +6,10 @@ ZomboidRCON provides a GUI tool to administrate Project Zomboid servers via RCON
 
 Open [release](https://github.com/kwmx/ZomboidRCON/releases/latest/) download the latest version of the executable program.
 
+Make sure you have the latest .NET 6 Desktop runtime installed
+
+[link](https://dotnet.microsoft.com/en-us/download/dotnet/6.0/runtime)
+
 ## Usage
 
 Simply open the ZomboidRCON.exe file and procceed to log in using your RCON credintals.
