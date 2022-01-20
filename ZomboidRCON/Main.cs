@@ -64,7 +64,7 @@ namespace ZomboidRCON
 
         private void reportIssueToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var ps = new ProcessStartInfo("")
+            var ps = new ProcessStartInfo("https://github.com/kwmx/ZomboidRCON/issues/new")
             {
                 UseShellExecute = true,
                 Verb = "open"

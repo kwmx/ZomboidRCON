@@ -64,11 +64,16 @@ namespace ZomboidRCON.HelperForms
                 {
                     vehicleImage.Image = (Image)Resources.ResourceManager.GetObject(vehicles[i].Variants[j].VariantID);
                 }
+                else
+                {
+                    vehicleImage.Image = vehicleImage.InitialImage;
+                }
                 spawnBtn.Enabled = true;
             }
             else
             {
                 spawnBtn.Enabled = false;
+                vehicleImage.Image = vehicleImage.InitialImage;
             }
         }
 
