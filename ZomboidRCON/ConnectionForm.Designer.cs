@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConnectionForm));
             this.ipLbl = new System.Windows.Forms.Label();
             this.connectBtn = new System.Windows.Forms.Button();
             this.ipTxt = new System.Windows.Forms.TextBox();
@@ -120,6 +121,7 @@
             this.Controls.Add(this.connectBtn);
             this.Controls.Add(this.ipLbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConnectionForm";
             this.Text = "Connect to Zomboid RCON server";
             this.Load += new System.EventHandler(this.ConnectionForm_Load);

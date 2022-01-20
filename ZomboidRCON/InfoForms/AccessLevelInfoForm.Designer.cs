@@ -229,6 +229,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1356, 587);
             this.MinimumSize = new System.Drawing.Size(1356, 587);
             this.Name = "AccessLevelInfoForm";

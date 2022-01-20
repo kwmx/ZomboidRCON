@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VehicleSpawnMenu));
             this.vehicleImage = new System.Windows.Forms.PictureBox();
             this.vehiclesCombo = new System.Windows.Forms.ComboBox();
             this.variantCombo = new System.Windows.Forms.ComboBox();
@@ -118,6 +119,7 @@
             this.Controls.Add(this.variantCombo);
             this.Controls.Add(this.vehiclesCombo);
             this.Controls.Add(this.vehicleImage);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1056, 715);
             this.MinimumSize = new System.Drawing.Size(585, 253);
             this.Name = "VehicleSpawnMenu";

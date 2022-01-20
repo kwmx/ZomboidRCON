@@ -34,6 +34,7 @@
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "0",
             ""}, -1);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.playerMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToWhitelistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -228,7 +229,7 @@
             // commandConsoleToolStripMenuItem
             // 
             this.commandConsoleToolStripMenuItem.Name = "commandConsoleToolStripMenuItem";
-            this.commandConsoleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.commandConsoleToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.commandConsoleToolStripMenuItem.Text = "Command Console";
             this.commandConsoleToolStripMenuItem.Click += new System.EventHandler(this.commandConsoleToolStripMenuItem_Click);
             // 
@@ -239,21 +240,21 @@
             this.reloadToolStripMenuItem});
             this.serverOptionToolStripMenuItem.Enabled = false;
             this.serverOptionToolStripMenuItem.Name = "serverOptionToolStripMenuItem";
-            this.serverOptionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.serverOptionToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.serverOptionToolStripMenuItem.Text = "Server Option";
             // 
             // viewAndChangeToolStripMenuItem
             // 
             this.viewAndChangeToolStripMenuItem.Enabled = false;
             this.viewAndChangeToolStripMenuItem.Name = "viewAndChangeToolStripMenuItem";
-            this.viewAndChangeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewAndChangeToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.viewAndChangeToolStripMenuItem.Text = "View and change";
             // 
             // reloadToolStripMenuItem
             // 
             this.reloadToolStripMenuItem.Enabled = false;
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.reloadToolStripMenuItem.Text = "Reload";
             // 
             // toolDatabaseToolStripMenuItem
@@ -278,27 +279,27 @@
             this.informationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.accessLevelsToolStripMenuItem});
             this.informationToolStripMenuItem.Name = "informationToolStripMenuItem";
-            this.informationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.informationToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.informationToolStripMenuItem.Text = "Information";
             // 
             // accessLevelsToolStripMenuItem
             // 
             this.accessLevelsToolStripMenuItem.Name = "accessLevelsToolStripMenuItem";
-            this.accessLevelsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.accessLevelsToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.accessLevelsToolStripMenuItem.Text = "Access Levels";
             this.accessLevelsToolStripMenuItem.Click += new System.EventHandler(this.accessLevelsToolStripMenuItem_Click);
             // 
             // reportIssueToolStripMenuItem
             // 
             this.reportIssueToolStripMenuItem.Name = "reportIssueToolStripMenuItem";
-            this.reportIssueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reportIssueToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.reportIssueToolStripMenuItem.Text = "Report Issue";
             this.reportIssueToolStripMenuItem.Click += new System.EventHandler(this.reportIssueToolStripMenuItem_Click);
             // 
             // creditsToolStripMenuItem
             // 
             this.creditsToolStripMenuItem.Name = "creditsToolStripMenuItem";
-            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.creditsToolStripMenuItem.Text = "Credits";
             this.creditsToolStripMenuItem.Click += new System.EventHandler(this.creditsToolStripMenuItem_Click);
             // 
@@ -362,6 +363,7 @@
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.playersView);
             this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Main";
             this.Text = "Zomboid Admin Tool";

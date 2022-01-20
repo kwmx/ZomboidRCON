@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommandConsole));
             this.outputLog = new System.Windows.Forms.RichTextBox();
             this.commandTxt = new System.Windows.Forms.TextBox();
             this.sendBtn = new System.Windows.Forms.Button();
@@ -35,6 +36,10 @@
             // 
             // outputLog
             // 
+            this.outputLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.outputLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.outputLog.Location = new System.Drawing.Point(12, 12);
             this.outputLog.Name = "outputLog";
             this.outputLog.ReadOnly = true;
@@ -45,6 +50,8 @@
             // 
             // commandTxt
             // 
+            this.commandTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.commandTxt.Location = new System.Drawing.Point(12, 415);
             this.commandTxt.Name = "commandTxt";
             this.commandTxt.Size = new System.Drawing.Size(702, 23);
@@ -54,6 +61,7 @@
             // 
             // sendBtn
             // 
+            this.sendBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.sendBtn.Location = new System.Drawing.Point(720, 415);
             this.sendBtn.Name = "sendBtn";
             this.sendBtn.Size = new System.Drawing.Size(68, 23);
@@ -70,6 +78,7 @@
             this.Controls.Add(this.sendBtn);
             this.Controls.Add(this.commandTxt);
             this.Controls.Add(this.outputLog);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CommandConsole";
             this.Text = "Command Console";
             this.Load += new System.EventHandler(this.CommandConsole_Load);
