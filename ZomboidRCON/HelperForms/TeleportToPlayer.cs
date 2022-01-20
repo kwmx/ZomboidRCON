@@ -56,7 +56,18 @@ namespace ZomboidRCON.HelperForms
         {
             teleportBtn.Enabled = false;
             playersCombo.Enabled = false;
-            bool rt = await server.TeleportToPlayer(player, player);
+            Player target = null;
+            foreach(Player p in players)
+            {
+                if(p.Name == playersCombo.Text) target = p;
+            }
+            if(target == null)
+            {
+                MessageBox.Show("Unable to find target player. Have they gone offline?", "ZomboidRCON");
+                playersCombo.Enabled = true;
+                return;
+            }
+            bool rt = await server.TeleportToPlayer(player, target);
             if (rt) Close();
             playersCombo.Enabled = true;
         }

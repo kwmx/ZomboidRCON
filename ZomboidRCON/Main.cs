@@ -43,6 +43,7 @@ namespace ZomboidRCON
 
         private void Main_Load(object sender, EventArgs e)
         {
+
         }
 
         private void Main_Shown(object sender, EventArgs e)
