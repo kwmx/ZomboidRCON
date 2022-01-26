@@ -122,6 +122,25 @@ namespace ZomboidRCON.Wrapper
                 return false;
             }
         }
+        public async Task<bool> TeleportPlayerToCoordinates(Player player, int x, int y, int z)
+        {
+            if (!player.isOnline)
+            {
+                MessageBox.Show("Player is offline, command cannot be executed", "ZomboidRCON");
+                return false;
+            }
+            try
+            {
+                string response = await client.ExecuteCommandAsync("teleportto " + player.Name + " " + x + "," + y + "," + z);
+                MessageBox.Show(response, "ZomboidRCON");
+                return true;
+            }
+            catch (TaskCanceledException)
+            {
+                MessageBox.Show("Unable to teleport player. Try reconnecting", "ZomboidRCON");
+                return false;
+            }
+        }
         public async Task<bool> SpawnVehicleForPlayer(Player player, Variant variant)
         {
             if (!player.isOnline)

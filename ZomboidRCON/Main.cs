@@ -1,6 +1,7 @@
 using RconSharp;
 using System.Diagnostics;
 using ZomboidRCON.Models;
+using ZomboidRCON.UpdateSystem;
 using ZomboidRCON.Wrapper;
 
 namespace ZomboidRCON
@@ -8,6 +9,8 @@ namespace ZomboidRCON
     public partial class Main : Form
     {
         private Server server;
+        private Updator updator;
+
         public Main(RconClient clientConnection, string host, int port)
         {
             InitializeComponent();
@@ -46,7 +49,7 @@ namespace ZomboidRCON
 
         private void Main_Load(object sender, EventArgs e)
         {
-
+            UpdateCheck();
         }
 
         private void Main_Shown(object sender, EventArgs e)
@@ -162,9 +165,7 @@ namespace ZomboidRCON
 
         private async void teleportToPlayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Player player = await GetPlayerByName(playersView.SelectedItems[0].Text);
-            HelperForms.TeleportToPlayer teleport = new HelperForms.TeleportToPlayer(player, server);
-            teleport.Show();
+            
         }
 
         private async void enableToolStripMenuItem_Click(object sender, EventArgs e)
@@ -190,7 +191,54 @@ namespace ZomboidRCON
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            server.Disconnect();
+            try
+            {
+                if(server != null)
+                    server.Disconnect();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            Application.Exit();
+        }
+
+        private async void toPlayerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Player player = await GetPlayerByName(playersView.SelectedItems[0].Text);
+            HelperForms.TeleportToPlayer teleport = new HelperForms.TeleportToPlayer(player, server);
+            teleport.Show();
+        }
+
+        private async void selectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Player player = await GetPlayerByName(playersView.SelectedItems[0].Text);
+            HelperForms.TeleportToCoordinates teleport = new HelperForms.TeleportToCoordinates(player, server);
+            teleport.Show();
+        }
+
+        private void openMapWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ps = new ProcessStartInfo("https://map.projectzomboid.com/#collapseThree")
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
+        }
+        private async void UpdateCheck()
+        {
+            if (updator == null)
+            {
+                //Constants.AssemblyVersionToSemver
+                updator = new Updator(Constants.RepoPath, "1.0.0", true, "ZomboidRCON.zip", "");
+            }
+            UpdateResult updateResult = await updator.CheckForUpdate();
+            if (updateResult.UpdateStatus == UpdateStatus.UpdateNeeded)
+            {
+                UpdateForm updateForm = new UpdateForm(updator, updateResult.Release);
+                updateForm.ShowDialog(this);
+            }
         }
     }
 }

@@ -132,6 +132,7 @@
             this.versionLbl.Size = new System.Drawing.Size(134, 15);
             this.versionLbl.TabIndex = 8;
             this.versionLbl.Text = "v1.0.0 (ALPHA RELEASE)";
+            this.versionLbl.Click += new System.EventHandler(this.versionLbl_Click);
             // 
             // Credits
             // 

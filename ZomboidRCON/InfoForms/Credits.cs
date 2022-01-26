@@ -53,5 +53,10 @@ namespace ZomboidRCON.InfoForms
             versionLbl.Text = Application.ProductVersion;
 
         }
+
+        private void versionLbl_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

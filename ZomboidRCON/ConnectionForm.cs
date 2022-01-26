@@ -6,19 +6,22 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using ZomboidRCON.UpdateSystem;
 namespace ZomboidRCON
 {
     public partial class ConnectionForm : Form
     {
         Main main;
+        bool ok = false;
         public ConnectionForm(Main MainForm)
         {
             InitializeComponent();
             main = MainForm;
+
         }
 
         private void connectBtn_Click(object sender, EventArgs e)
@@ -76,21 +79,9 @@ namespace ZomboidRCON
 
                     main.ResetConnection(client, address.ToString(), port);
                     main.Show();
+                    ok = true;
                     Close();
                     return;
-                    /*
-                    string status = await client.ExecuteCommandAsync("players");
-                    string[] arr = status.Split('\n');
-                    foreach(string item in arr)
-                    {
-                        if(item.StartsWith('-'))
-                        {
-                            string user = item.Substring(1);
-                            MessageBox.Show(user);
-
-                        }
-                    }
-                    */
                 }
                 else
                 {
@@ -114,6 +105,11 @@ namespace ZomboidRCON
             portTxt.Text = Properties.Settings.Default.port <= 1023 ? "" : "" + Properties.Settings.Default.port;
             passwordTxt.Text = String.IsNullOrWhiteSpace(Properties.Settings.Default.password) ? "" : Properties.Settings.Default.password;
             saveBox.Checked = !string.IsNullOrEmpty(portTxt.Text) && !string.IsNullOrEmpty(ipTxt.Text) && !string.IsNullOrEmpty(passwordTxt.Text);
+        }
+
+        private void ConnectionForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(!ok) Application.Exit();
         }
     }
 }
