@@ -230,8 +230,7 @@ namespace ZomboidRCON
         {
             if (updator == null)
             {
-                //Constants.AssemblyVersionToSemver
-                updator = new Updator(Constants.RepoPath, "1.0.0", true, "ZomboidRCON.zip", "");
+                updator = new Updator(Constants.RepoPath, Constants.AssemblyVersionToSemver, true, "ZomboidRCON.zip", "");
             }
             UpdateResult updateResult = await updator.CheckForUpdate();
             if (updateResult.UpdateStatus == UpdateStatus.UpdateNeeded)
