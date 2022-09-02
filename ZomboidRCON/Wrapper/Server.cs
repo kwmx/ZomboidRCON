@@ -23,6 +23,14 @@ namespace ZomboidRCON.Wrapper
             dataManager = new DataManager(host.Replace(".", "") + port + "_db");
             _ = GetPlayers();
         }
+        public Server(RconClient client, string host, int port, string dbName)
+        {
+            this.client = client;
+            this.host = host;
+            this.port = port;
+            dataManager = new DataManager(dbName.Replace(".", "").Replace(":", "") + port + "_db");
+            _ = GetPlayers();
+        }
         public async Task<List<Player>> GetPlayers()
         {
             dataManager.SetAllPlayersOffline();

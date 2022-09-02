@@ -26,6 +26,7 @@ namespace ZomboidRCON
 
         private void connectBtn_Click(object sender, EventArgs e)
         {
+            IPAddress? address = null;
             if (!saveBox.Checked)
             {
                 Properties.Settings.Default.ip = "";
@@ -38,15 +39,25 @@ namespace ZomboidRCON
                 MessageBox.Show(this, "All fields must be filled", "ZomboidRCON");
                 return;
             }
-            if (!IPAddress.TryParse(ipTxt.Text, out IPAddress address))
+            if (!IPAddress.TryParse(ipTxt.Text, out address))
             {
-                MessageBox.Show(this, "Incorrect IP address", "ZomboidRCON");
-                return;
-
+                try
+                {
+                    ipTxt.Text = ipTxt.Text.Replace("http://", "").Replace("https://", "").Replace("/", "");
+                    address = GetAddressFromUrl(ipTxt.Text);
+                    if (address == null) {
+                        MessageBox.Show(this, "Couldn't find a valid IP for the provided URL", "ZomboidRCON");
+                        return;
+                    }
+                } catch (Exception exz) {
+                    MessageBox.Show(this, "Incorrect IP address: " + exz.Message, "ZomboidRCON");
+                    return;
+                }
             }
             if (address == null || address.AddressFamily != System.Net.Sockets.AddressFamily.InterNetwork)
             {
                 MessageBox.Show(this, "Incorrect IP please enter an IPv4 address", "ZomboidRCON");
+                return;
             }
             if (!int.TryParse(portTxt.Text, out int port))
             {
@@ -58,9 +69,9 @@ namespace ZomboidRCON
             passwordTxt.Enabled = false;
             connectBtn.Enabled = false;
             saveBox.Enabled = false;
-            _ = RconConnectAsync(address, port, passwordTxt.Text);
+            _ = RconConnectAsync(address, port, passwordTxt.Text, ipTxt.Text);
         }
-        private async Task RconConnectAsync(IPAddress address, int port, string password)
+        private async Task RconConnectAsync(IPAddress address, int port, string password, string dbname)
         {
             RconClient client = RconClient.Create(address.ToString(), port);
             try
@@ -77,7 +88,7 @@ namespace ZomboidRCON
                         Properties.Settings.Default.Save();
                     }
 
-                    main.ResetConnection(client, address.ToString(), port);
+                    main.ResetConnection(client, address.ToString(), port, dbname);
                     main.Show();
                     ok = true;
                     Close();
@@ -99,6 +110,18 @@ namespace ZomboidRCON
             saveBox.Enabled = true;
             
         }
+        private IPAddress? GetAddressFromUrl(string url)
+        {
+            if (Uri.CheckHostName(url) == UriHostNameType.Unknown) throw new Exception("Invalid URL");
+            Uri uri = new Uri("http://" + url);
+            IPHostEntry ihe = Dns.GetHostEntry(uri.Host);
+            if(ihe.AddressList.Length > 0)
+                foreach(IPAddress ipa in ihe.AddressList)
+                {
+                    if (ipa.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork) return ipa; 
+                }
+            return null;
+        }
         private void ConnectionForm_Load(object sender, EventArgs e)
         {
             ipTxt.Text = String.IsNullOrWhiteSpace(Properties.Settings.Default.ip) ? "" : Properties.Settings.Default.ip;
@@ -110,6 +133,11 @@ namespace ZomboidRCON
         private void ConnectionForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if(!ok) Application.Exit();
+        }
+
+        private void ipTxt_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

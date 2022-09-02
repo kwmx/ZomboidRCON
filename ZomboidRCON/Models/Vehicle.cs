@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZomboidRCON.Models
 {
-    internal class Vehicle
+    public class Vehicle
     {
         public int Id { get; set; }
         public string Name { get; set; }

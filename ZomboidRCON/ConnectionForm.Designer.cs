@@ -64,6 +64,7 @@
             this.ipTxt.Name = "ipTxt";
             this.ipTxt.Size = new System.Drawing.Size(273, 23);
             this.ipTxt.TabIndex = 2;
+            this.ipTxt.TextChanged += new System.EventHandler(this.ipTxt_TextChanged);
             // 
             // passwordTxt
             // 

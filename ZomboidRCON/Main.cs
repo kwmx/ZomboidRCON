@@ -41,9 +41,9 @@ namespace ZomboidRCON
             refreshBtn.Cursor = Cursors.Hand;
         }
 
-        public void ResetConnection(RconClient clientConnection, string host, int port)
+        public void ResetConnection(RconClient clientConnection, string host, int port, string dbname)
         {
-            server = new Server(clientConnection, host, port);
+            server = new Server(clientConnection, host, port, dbname);
             RefreshPlayers();
         }
 
